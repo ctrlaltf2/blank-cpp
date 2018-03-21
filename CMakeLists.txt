@@ -1,22 +1,42 @@
-cmake_minimum_required(VERSION 3.1)
-project(blank)
+cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
+project(blank-cpp
+    LANGUAGES CXX
+    DESCRIPTION ""
+)
 
-set(CMAKE_CXX_FLAGS "-Wall")
+# find_package(Boost 1.65.1 COMPONENTS program_options REQUIRED)
 
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
+add_executable(blank-cpp
+    # src/
+)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
+set_target_properties(blank-cpp
+    PROPERTIES
+        CXX_STANDARD 11
+        CXX_STANDARD_REQUIRED ON
+        CXX_EXTENSIONS OFF
+        RUNTIME_OUTPUT_DIRECTORY bin
+)
 
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O2")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -ggdb")
+target_compile_features(blank-cpp
+    PUBLIC
+        cxx_std_11
+)
 
-if(CMAKE_BUILD_TYPE MATCHES DEBUG)
-    add_definitions(-DDEBUG)
-endif(CMAKE_BUILD_TYPE MATCHES DEBUG)
+target_include_directories(blank-cpp
+    PUBLIC
+        include
+        #        ${Boost_INCLUDE_DIR}
+)
 
-include_directories(include)
-file(GLOB SOURCES "src/*.cpp")
+target_compile_options(blank-cpp
+    PUBLIC
+        -Wall
+        -Wextra
+        -O2
+)
 
-add_executable(blank ${SOURCES})
+#target_link_libraries(blank-cpp
+#    PUBLIC
+#        ${Boost_LIBRARIES}
+#)

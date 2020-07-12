@@ -1,2 +1,2 @@
 # blank-cpp
-Blank template project for new cpp projects
+Blank template project for new cpp projects (needs updated)
